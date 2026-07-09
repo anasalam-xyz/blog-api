@@ -5,4 +5,4 @@ app = FastAPI()
 
 @app.get("/")
 def root():
-    return {"status": 200, "message": "Blogging Platform API"}
+    return {"message": "Blog Platform API"}
