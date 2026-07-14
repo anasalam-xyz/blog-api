@@ -6,6 +6,8 @@ from sqlalchemy import pool
 from alembic import context
 
 from app.db.base import Base
+from app.models.user import User  # type: ignore
+from app.models.post import Post  # type: ignore
 from app.core.config import settings
 
 # this is the Alembic Config object, which provides
