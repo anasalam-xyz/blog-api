@@ -1,19 +1,15 @@
-from passlib.context import CryptContext
 from jose import jwt
 from datetime import datetime, timedelta, timezone
 from app.core.config import settings
-
-pwd_context = CryptContext(
-    schemes=["bcrypt"], deprecated="auto"
-)  # if i ever add newer schemes later, old bcrypt hashes still verify correctly, marked as "should rehash."
+import bcrypt
 
 
 def hash_password(password: str) -> str:
-    return pwd_context.hash(password)
+    return bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
 
 
 def verify_hash(plain_password: str, hashed_password: str) -> bool:
-    return pwd_context.verify(plain_password, hashed_password)
+    return bcrypt.checkpw(plain_password.encode(), hashed_password.encode())
 
 
 def create_access_token(

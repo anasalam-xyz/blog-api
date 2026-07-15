@@ -19,7 +19,7 @@ async def register(user_in: UserCreate, db: Annotated[AsyncSession, Depends(get_
         )
 
     hashed = hash_password(user_in.password)
-    user = create_user(db, user_in.email, hashed)
+    user = await create_user(db, user_in.email, hashed)
 
     return user
 
