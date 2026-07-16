@@ -4,7 +4,7 @@ from app.api import auth, post
 app = FastAPI(title="Blog API")
 
 
-@app.get("/test")
+@app.get("/health")
 def test():
     return {"message": "Blog Platform API"}
 

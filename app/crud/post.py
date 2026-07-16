@@ -21,3 +21,16 @@ async def get_post(db: AsyncSession, post_id: int) -> Post | None:
 async def get_posts(db: AsyncSession) -> list[Post] | None:
     result = await db.execute(select(Post))
     return list(result.scalars().all())
+
+
+async def update_post(db: AsyncSession, post: Post, title: str, content: str) -> Post:
+    post.title = title
+    post.content = content
+    await db.commit()
+    await db.refresh(post)
+    return post
+
+
+async def delete_post(db: AsyncSession, post: Post) -> None:
+    await db.delete(post)
+    await db.commit()
